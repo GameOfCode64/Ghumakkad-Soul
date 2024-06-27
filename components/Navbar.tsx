@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
           </Sheet>
         </div>
       </div>
-      <div className="w-full md:fixed lg:fixed hidden h-[80px] bg-[#fff] backdrop-blur-lg shadow-sm lg:flex md:flex items-center justify-between">
+      <div className="w-full hidden h-[80px] bg-[#fff] backdrop-blur-lg shadow-sm lg:flex md:flex items-center justify-between">
         <div className="h-full relative bg-teal-700 lg:w-[30%] w-[40%] flex items-center justify-normal px-8 lg:px-20 py-7 rounded-tr-[135px] rounded-br-[135px]">
           {navbarData.logoUrl && (
             <Link href="/">
