@@ -3,13 +3,12 @@ import React from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
-  DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useSearch } from "@/hooks/use-search";
-import { Input } from "./ui/input";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const Search = () => {
   const { isOpen, onClose, onOpen } = useSearch();
@@ -26,6 +25,9 @@ const Search = () => {
             className="w-full h-full border-none "
           />
         </div>
+        <DialogFooter>
+          <Button className=" bg-teal-900 hover:bg-teal-800">Search</Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
