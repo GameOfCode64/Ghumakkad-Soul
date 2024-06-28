@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 const ImageSlider: React.FC = () => {
   const [sliders, setSliders] = useState<BackgroundSlider[]>([]);
   const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+    Autoplay({ delay: 10000, stopOnInteraction: true })
   );
 
   useEffect(() => {
@@ -32,13 +32,11 @@ const ImageSlider: React.FC = () => {
 
     fetchSliders();
   }, []);
-
-  console.log(sliders);
   return (
     <div className="w-full h-screen relative">
       <Carousel
         plugins={[plugin.current]}
-        className="w-full h-full md:max-h-[600px]"
+        className="w-full h-full md:h-[600px] lg:h-screen"
       >
         <CarouselContent>
           {sliders.map((slider, index) => (
@@ -46,25 +44,25 @@ const ImageSlider: React.FC = () => {
               <Image
                 src={slider.backgroundImageUrl}
                 alt="demo"
-                width={0}
-                height={0}
-                className="lg:w-full w-full object-cover h-full absolute top-0 left-0 z-[-1] "
+                layout="fill"
+                objectFit="cover"
+                className="z-[-1]"
               />
               <div className="z-[1] text-white lg:px-20 lg:py-32 py-[100px] md:px-12 md:py-12 px-4 ">
-                <h1 className="lg:text-[65px] md:text-[50px] text-[40px] text-nowrap font-bold">
+                <h1 className="lg:text-[65px] md:text-[50px] text-[40px] font-bold">
                   {slider.headingText1}
                 </h1>
-                <h4 className="mt-8 lg:w-[70%] w-auto lg:text-[55px] text-[25px] md:text-[50px] font-semibold">
+                <h4 className="mt-8 lg:w-[70%] w-auto lg:text-[55px] md:text-[40px] text-[25px] font-semibold">
                   {slider.headingText2}
                 </h4>
-                <p className="mt-8 lg:w-[40%] md:w-[90%] w-auto  text-[17px]">
+                <p className="mt-8 lg:w-[40%] md:w-[90%] w-auto text-[17px]">
                   {slider.description}
                 </p>
                 <div className="flex items-center justify-normal gap-8 mt-8">
-                  <Button className="bg-[#fff] px-6 py-5 rounded-3xl text-[#222] font-semibold border-[2px] hover:bg-transparent border-white hover:text-white  ease-in transition-[0.5s]">
+                  <Button className="bg-[#fff] px-6 py-5 rounded-3xl text-[#222] font-semibold border-[2px] hover:bg-transparent border-white hover:text-white ease-in transition-[0.5s]">
                     View Details
                   </Button>
-                  <Button className="hover:bg-[#fff] px-8 py-5 rounded-3xl text-[#fff] font-semibold border-[2px] bg-transparent border-white hover:text-[#222]  ease-in transition-[0.5s]">
+                  <Button className="hover:bg-[#fff] px-8 py-5 rounded-3xl text-[#fff] font-semibold border-[2px] bg-transparent border-white hover:text-[#222] ease-in transition-[0.5s]">
                     Book Now
                   </Button>
                 </div>
@@ -78,20 +76,3 @@ const ImageSlider: React.FC = () => {
 };
 
 export default ImageSlider;
-
-// {sliders.map((slider, index) => (
-//     <CarouselItem key={index} className="relative w-full h-full">
-//       <Image
-//         src={slider.backgroundImageUrl}
-//         alt={`Background for ${slider.headingText1}`}
-//         layout="fill"
-//         objectFit="cover"
-//         className="absolute inset-0"
-//       />
-//       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-4">
-//         <h1 className="text-4xl font-bold">{slider.headingText1}</h1>
-//         <h2 className="text-2xl">{slider.headingText2}</h2>
-//         <p className="text-lg">{slider.description}</p>
-//       </div>
-//     </CarouselItem>
-//   ))}
