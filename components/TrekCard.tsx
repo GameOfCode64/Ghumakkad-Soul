@@ -38,11 +38,13 @@ const TrekCard: React.FC = () => {
   }
 
   return (
-    <div className="w-full lg:mt-32 mt-16 h-auto">
-      <div className="w-full relative lg:px-20 md:px-12 px-4 mb-8 h-auto">
-        <h1 className="font-bold text-2xl md:text-3xl relative heading">
-          Recommended Tracks
-        </h1>
+    <div className="w-full lg:mt-32 mt-8 h-auto">
+      <div className="w-full relative lg:px-14 md:px-4  mb-8 h-auto">
+        <div className="px-8">
+          <h1 className="font-bold text-2xl md:text-3xl  relative heading">
+            Recommended Tracks
+          </h1>
+        </div>
         <div className="w-full h-full mt-12">
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
@@ -69,7 +71,7 @@ const TrekCard: React.FC = () => {
           >
             {trekCards.map((trek, index) => (
               <SwiperSlide
-                className="flex flex-col w-[350px] h-full rounded-md px-8 py-4"
+                className="flex flex-col w-[350px] h-full rounded-md px-8 py-4 mb-4"
                 key={index}
               >
                 <div className="w-full h-[50%] bg-center">
@@ -107,9 +109,9 @@ const TrekCard: React.FC = () => {
                       </span>
                     </p>
                     <p className="flex items-center font-semibold justify-normal gap-4">
-                      <Calendar size={22} className="text-teal-700" />
-                      Best Time to visit:
-                      <span className="text-teal-700 ">
+                      <Calendar size={22} className="text-teal-700 " />
+                      Best Time:
+                      <span className="text-teal-700 text-nowrap">
                         {trek.bestTime.join(" to ")}
                       </span>
                     </p>
