@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import "@mantine/core/styles.css";
+import type { Metadata } from "next";
+import { createTheme, MantineProvider } from "@mantine/core";
+import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Search from "@/components/Search";
 
@@ -20,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <Search />
-        {children}
+        <MantineProvider>
+          <Navbar />
+          <Search />
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );

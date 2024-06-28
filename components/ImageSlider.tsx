@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 const ImageSlider: React.FC = () => {
   const [sliders, setSliders] = useState<BackgroundSlider[]>([]);
   const plugin = React.useRef(
-    Autoplay({ delay: 10000, stopOnInteraction: true })
+    Autoplay({ delay: 6000, stopOnInteraction: true })
   );
 
   useEffect(() => {
@@ -49,10 +49,10 @@ const ImageSlider: React.FC = () => {
                 className="z-[-1]"
               />
               <div className="z-[1] text-white lg:px-20 lg:py-32 py-[100px] md:px-12 md:py-12 px-4 ">
-                <h1 className="lg:text-[65px] md:text-[50px] text-[40px] font-bold">
+                <h1 className="lg:text-[65px] md:text-[50px] text-[40px] font-bold text-wrap">
                   {slider.headingText1}
                 </h1>
-                <h4 className="mt-8 lg:w-[70%] w-auto lg:text-[55px] md:text-[40px] text-[25px] font-semibold">
+                <h4 className="mt-8 lg:w-[70%] w-auto text-wrap lg:text-[55px] md:text-[40px] text-[25px] font-semibold">
                   {slider.headingText2}
                 </h4>
                 <p className="mt-8 lg:w-[40%] md:w-[90%] w-auto text-[17px]">
