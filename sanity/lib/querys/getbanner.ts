@@ -1,6 +1,6 @@
 import { client } from "@/sanity/lib/client";
 
-export interface banner {
+interface banner {
   heading1: string;
   heading2: string;
   heading3: string;

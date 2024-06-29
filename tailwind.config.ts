@@ -28,6 +28,9 @@ const config = {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+        textShadow: {
+          "teal-700-30": "5px 12px 14px rgba(13, 148, 136, 0.7)",
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

@@ -3,6 +3,7 @@ import { slider } from "@/sanity/lib/schemas/backgroundSlider";
 import { navbar } from "@/sanity/lib/schemas/navbar";
 import { trekCard } from "@/sanity/lib/schemas/trekCard";
 import { banner } from "@/sanity/lib/schemas/banner";
+import { about } from "@/sanity/lib/schemas/about";
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [slider, navbar, trekCard, banner],
+  types: [slider, navbar, trekCard, banner, about],
 };

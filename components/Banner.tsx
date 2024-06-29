@@ -42,10 +42,10 @@ const Banner = () => {
             </p>
           </div>
           <div className="flex items-center justify-center flex-col">
-            <div className="flex items-center  justify-center w-[150px] h-[150px] rounded-full bg-teal-700">
+            <div className="flex items-center justify-center w-[150px] h-[150px] rounded-full bg-teal-700">
               <WalletMinimal size={50} className="text-white" />
             </div>
-            <p className="text-center mt-4 w-[150px]   font-bold">
+            <p className="text-center mt-4 w-[150px] font-bold mb-4">
               {ban.heading3}
             </p>
           </div>
