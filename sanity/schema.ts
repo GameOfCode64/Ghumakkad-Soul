@@ -4,6 +4,7 @@ import { navbar } from "@/sanity/lib/schemas/navbar";
 import { trekCard } from "@/sanity/lib/schemas/trekCard";
 import { banner } from "@/sanity/lib/schemas/banner";
 import { about } from "@/sanity/lib/schemas/about";
+import { review } from "@/sanity/lib/schemas/review";
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [slider, navbar, trekCard, banner, about],
+  types: [slider, navbar, trekCard, banner, about, review],
 };

@@ -1,10 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import Image from "next/image";
 import { Calendar, Clock, Map, MapPin, Phone, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -47,7 +45,7 @@ const TrekCard: React.FC = () => {
         </div>
         <div className="w-full h-full mt-12">
           <Swiper
-            modules={[Autoplay, Navigation, Pagination]}
+            modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={4}
             breakpoints={{
@@ -64,7 +62,6 @@ const TrekCard: React.FC = () => {
                 spaceBetween: 30,
               },
             }}
-            pagination={{ clickable: true }}
             autoplay={{ delay: 5000 }}
             speed={700}
             className="w-full h-[550px] py-[20px] flex items-center"
