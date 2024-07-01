@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: `Blogs Related to Trekking.} `,
     type: "website",
     locale: "en_IN",
-    url: `https://localhost:3000/blogs`,
+    url: `https://ghumakkadsoul.vercel.app/blogs`,
     siteName: "Ghumakkadsoul",
   },
 };

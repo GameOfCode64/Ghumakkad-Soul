@@ -41,7 +41,7 @@ export async function generateMetadata({
       description: `Blog Post About | ${params?.slug}`,
       type: "website",
       locale: "en_IN",
-      url: `https://localhost:3000/blogs/${params?.slug}`,
+      url: `https://ghumakkadsoul.vercel.app/blogs/${params?.slug}`,
       siteName: "Ghumakkadsoul",
     },
   };

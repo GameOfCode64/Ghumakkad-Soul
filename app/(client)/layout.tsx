@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description: `Since the world is wide and life is short, the better it is to start exploring it sooner.} `,
     type: "website",
     locale: "en_IN",
-    url: `https://localhost:3000/`,
+    url: `https://ghumakkadsoul.vercel.app/`,
     siteName: "Ghumakkadsoul",
   },
 };
