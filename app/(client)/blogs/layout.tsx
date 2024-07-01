@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: `https://ghumakkadsoul.vercel.app/blogs`,
-    siteName: "Ghumakkadsoul",
+    siteName: "ghumakkadsoul.in",
   },
 };
 

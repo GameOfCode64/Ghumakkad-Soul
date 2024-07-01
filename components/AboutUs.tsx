@@ -33,7 +33,7 @@ const AboutUs = () => {
 
     fetchData();
   }, []);
-  console.log(about);
+
   if (!about) {
     return <div>Loading...</div>;
   }

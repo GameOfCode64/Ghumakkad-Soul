@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Search from "@/components/Search";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: `https://ghumakkadsoul.vercel.app/`,
-    siteName: "Ghumakkadsoul",
+    siteName: "ghumakkadsoul.in",
   },
 };
 
@@ -38,6 +39,7 @@ export default function RootLayout({
           <Navbar />
           <Search />
           {children}
+
           <Footer />
         </MantineProvider>
       </body>
