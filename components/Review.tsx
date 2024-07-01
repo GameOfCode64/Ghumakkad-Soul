@@ -67,15 +67,15 @@ const Review = () => {
                     <Image
                       src={data.imageUrl}
                       alt="user_img"
-                      width={0}
-                      height={0}
+                      width={50}
+                      height={50}
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
                   <div className="flex flex-col">
                     <p className=" text-[17px] font-semibold">{data.name}</p>
                     <span className="text-[12px] text-gray-600">
-                      {data.date}
+                      {new Date(data.date).toDateString()}
                     </span>
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 import "./globals.css";
 import "@mantine/core/styles.css";
 import type { Metadata } from "next";
-import { createTheme, MantineProvider } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Search from "@/components/Search";
@@ -14,7 +14,15 @@ export const metadata: Metadata = {
   description:
     "Since the world is wide and life is short, the better it is to start exploring it sooner. ",
   icons: {
-    icon: "./logo.svg",
+    icon: "./favicon.ico",
+  },
+  openGraph: {
+    title: `Ghumakkad Soul | Home`,
+    description: `Since the world is wide and life is short, the better it is to start exploring it sooner.} `,
+    type: "website",
+    locale: "en_IN",
+    url: `https://localhost:3000/`,
+    siteName: "Ghumakkadsoul",
   },
 };
 

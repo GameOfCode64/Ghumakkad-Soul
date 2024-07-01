@@ -6,7 +6,9 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import banner from "@/public/yosemite-922757_1280.jpg";
+import banner from "@/public/avatar.png";
+import blog1 from "@/public/blog1.jpg";
+import blog2 from "@/public/blog2.jpg";
 import Image from "next/image";
 import Link from "next/link";
 const Blogs = () => {
@@ -33,13 +35,13 @@ const Blogs = () => {
           <div className="flex items-center justify-start flex-col h-[550px] px-3 py-4">
             <div className="w-full lg:h-[70%] h-[50%]">
               <Image
-                src={banner}
+                src={blog1}
                 className="w-full h-full rounded-3xl object-center"
                 alt="blog_image"
               />
             </div>
             <div className="flex flex-col mt-3 w-full text-wrap px-2">
-              <Link href="">
+              <Link href="/blogs">
                 <h1 className="font-bold text-teal-700">
                   Way is Trekking is Important for Human Mental Health
                 </h1>
@@ -74,21 +76,22 @@ const Blogs = () => {
           <div className="flex items-center justify-start flex-col h-[550px] px-3 py-4">
             <div className="w-full lg:h-[70%] h-[50%]">
               <Image
-                src={banner}
+                src={blog2}
                 className="w-full h-full rounded-3xl object-center"
                 alt="blog_image"
               />
             </div>
             <div className="flex flex-col mt-3 w-full text-wrap px-2">
-              <Link href="">
+              <Link href="/blogs">
                 <h1 className="font-bold text-teal-700">
-                  Way is Trekking is Important for Human Mental Health
+                  The Physical Benefits of Trekking: Enhancing Fitness and
+                  Well-Being
                 </h1>
               </Link>
               <p className="text-sm mt-2 text-gray-700">
-                Trekking offers significant mental health benefits by reducing
-                stress, enhancing creativity, and boosting self-esteem through
-                physical activity and connection with nature.
+                Explore how trekking contributes to physical fitness, improves
+                cardiovascular health, and enhances overall well-being through
+                regular outdoor activity and natural terrain challenges.
               </p>
               <div className="flex items-center justify-normal mt-4 gap-4">
                 <div className="w-[50px] h-[50px] ">
@@ -106,7 +109,7 @@ const Blogs = () => {
                   </h1>
                   <p className="font-semibold">
                     Reading Time:{" "}
-                    <span className="font-semibold text-teal-700">9 min</span>
+                    <span className="font-semibold text-teal-700">12 min</span>
                   </p>
                 </div>
               </div>
