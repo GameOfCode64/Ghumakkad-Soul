@@ -7,10 +7,14 @@ import Image from "next/image";
 import { Calendar, Clock, Map, MapPin, Phone, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import getTrekCardData from "@/sanity/lib/querys/getcard";
+import Link from "next/link";
 
 export interface TrekCard {
   trekName: string;
   backgroundImageUrl: string;
+  slug: {
+    current: string;
+  };
   duration: string;
   location: string;
   distance: string;
@@ -117,9 +121,14 @@ const TrekCard: React.FC = () => {
                     <Button className="py-6 bg-transparent border-[4px] text-emerald-700 rounded-md border-solid border-teal-700 hover:text-white hover:border-teal-600 hover:bg-teal-600">
                       <Phone />
                     </Button>
-                    <Button className="w-full py-6 border-[4px] border-solid border-teal-700 bg-teal-700 hover:bg-teal-600 hover:border-teal-600">
-                      View Details
-                    </Button>
+                    <Link
+                      href={`/treks/${trek.slug.current}`}
+                      className="w-full"
+                    >
+                      <Button className="w-full py-6 border-[4px] border-solid border-teal-700 bg-teal-700 hover:bg-teal-600 hover:border-teal-600">
+                        View Details
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </SwiperSlide>
