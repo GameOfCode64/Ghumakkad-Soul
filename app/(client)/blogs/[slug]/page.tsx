@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { PortableText } from "next-sanity";
 import getfullblogs from "@/sanity/lib/querys/getfullblog";
-import NotFound from "@/app/(client)/blogs/[slug]/not-found";
+import NotFound from "@/components/not-found";
 import { urlForImage } from "@/sanity/lib/image";
 import { Metadata } from "next";
 
@@ -50,7 +50,7 @@ export async function generateMetadata({
 const Page = async ({ params }: Params) => {
   const data: BlogProps = await getfullblogs(params?.slug);
   if (!data) {
-    return <NotFound />;
+    return <NotFound title="Blog" link="blogs" />;
   }
 
   return (

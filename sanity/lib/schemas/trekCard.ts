@@ -1,3 +1,5 @@
+import { Rule } from "sanity";
+
 export const trekCard = {
   name: "trekCard",
   title: "Trek Card",
@@ -7,6 +9,13 @@ export const trekCard = {
       name: "trekName",
       title: "Trek Name",
       type: "string",
+    },
+    {
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "trekName" },
+      validation: (Rule: Rule) => Rule.required().error("Required"),
     },
     {
       name: "backgroundImage",

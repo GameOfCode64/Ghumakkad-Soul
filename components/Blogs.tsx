@@ -21,7 +21,7 @@ const Blogs = () => {
           </h1>
           <Select>
             <SelectTrigger className="lg:w-[180px] md:w-[180px] w-auto focus-visible:ring-teal-700 font-semibold">
-              Filters
+              Filter
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>

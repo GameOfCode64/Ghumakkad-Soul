@@ -13,6 +13,7 @@ import {
 } from "@/sanity/lib/querys/getBackgroundSliders";
 import demo from "@/public/yosemite-922757_1280.jpg";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const ImageSlider: React.FC = () => {
   const [sliders, setSliders] = useState<BackgroundSlider[]>([]);
@@ -59,12 +60,16 @@ const ImageSlider: React.FC = () => {
                   {slider.description}
                 </p>
                 <div className="flex items-center justify-normal gap-8 mt-8">
-                  <Button className="bg-[#fff] px-6 py-5 rounded-3xl text-[#222] font-semibold border-[2px] hover:bg-transparent border-white hover:text-white ease-in transition-[0.5s]">
-                    View Details
-                  </Button>
-                  <Button className="hover:bg-[#fff] px-8 py-5 rounded-3xl text-[#fff] font-semibold border-[2px] bg-transparent border-white hover:text-[#222] ease-in transition-[0.5s]">
-                    Book Now
-                  </Button>
+                  <Link href="/treks">
+                    <Button className="bg-[#fff] px-6 py-5 rounded-3xl text-[#222] font-semibold border-[2px] hover:bg-transparent border-white hover:text-white ease-in transition-[0.5s]">
+                      View Details
+                    </Button>
+                  </Link>
+                  <Link href="/book-now">
+                    <Button className="hover:bg-[#fff] px-8 py-5 rounded-3xl text-[#fff] font-semibold border-[2px] bg-transparent border-white hover:text-[#222] ease-in transition-[0.5s]">
+                      Book Now
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </CarouselItem>
