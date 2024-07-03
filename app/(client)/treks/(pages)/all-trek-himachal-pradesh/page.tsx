@@ -61,7 +61,7 @@ const page = () => {
           <p className="font-semibold">Filters By:</p>
         </div>
 
-        <div className="w-full px-4 flex items-center justify-center">
+        <div className="w-full lg:w-auto md:w-auto px-4 flex items-center justify-center">
           <Tabs defaultValue="Himachal" className=" w-full bg-transparent">
             <TabsList className="flex w-full">
               <Link href="/treks">

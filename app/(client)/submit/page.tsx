@@ -3,7 +3,6 @@ import React from "react";
 import submit from "@/public/submit.svg";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
 const page = () => {
   return (
