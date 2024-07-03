@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +13,23 @@ import { Button } from "@/components/ui/button";
 
 const Search = () => {
   const { isOpen, onClose, onOpen } = useSearch();
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+
+  const handleSearch = () => {
+    if (query.trim()) {
+      const formattedQuery = query.trim().split(" ").join("-");
+      router.push(`/search/${formattedQuery}`);
+      onClose();
+    }
+  };
+
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <Dialog
       open={isOpen}
@@ -22,11 +40,19 @@ const Search = () => {
         <div className="w-full h-[50px]">
           <Input
             placeholder="Search for Treks"
-            className="w-full h-full border-none "
+            className="w-full h-full border-none"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
         </div>
         <DialogFooter>
-          <Button className=" bg-teal-900 hover:bg-teal-800">Search</Button>
+          <Button
+            className="bg-teal-900 hover:bg-teal-800"
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
