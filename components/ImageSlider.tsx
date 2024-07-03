@@ -68,7 +68,7 @@ const ImageSlider: React.FC = () => {
                   </Link>
 
                   <Button
-                    onClick={() => onOpen}
+                    onClick={() => onOpen()}
                     className="hover:bg-[#fff] px-8 py-5 rounded-3xl text-[#fff] font-semibold border-[2px] bg-transparent border-white hover:text-[#222] ease-in transition-[0.5s]"
                   >
                     Book Now
