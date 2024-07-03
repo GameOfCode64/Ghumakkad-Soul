@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Search from "@/components/Search";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import Booking from "@/components/Booking";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,9 +38,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <MantineProvider>
           <Navbar />
+          <Booking />
           <Search />
           {children}
-
           <Footer />
         </MantineProvider>
       </body>

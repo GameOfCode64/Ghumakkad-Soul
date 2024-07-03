@@ -14,9 +14,9 @@ import {
 import getTrekCardData from "@/sanity/lib/querys/getcard";
 import Image from "next/image";
 import Link from "next/link";
-import ApplyFilter from "@/components/ApplyFilter";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import getlocation from "@/sanity/lib/querys/getLoaction";
+import NotFound from "@/components/not-found";
 
 export interface TrekCard {
   _id: string;
@@ -41,48 +41,44 @@ const page = () => {
   useEffect(() => {
     const fetchData = async () => {
       setisLoading(true);
-      const data = await getTrekCardData();
+      const data = await getlocation("Uttarakhand");
       setTrekCards(data);
     };
     fetchData();
     setisLoading(false);
   }, []);
 
+  console.log(trekCards);
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  const clearFilter = () => {};
+  if (trekCards.length === 0) {
+    return <NotFound title="Trek" link="treks" />;
+  }
   return (
-    <div className="w-full h-full lg:px-20 md:px-12 px-4">
-      <div className="w-full h-auto">
-        <div className="flex items-center justify-between">
-          <h1 className="mb-12 relative text-[30px] font-bold  text-teal-700 trek">
-            Treks
-          </h1>
+    <div className="mt-4">
+      <div className="flex  items-center justify-between">
+        <div className="md:flex lg:block hidden">
+          <p className="font-semibold">Filters By:</p>
         </div>
-        <div className="flex  items-center justify-between">
-          <div className="md:flex lg:block hidden">
-            <p className="font-semibold">Filters By:</p>
-          </div>
 
-          <div className="w-full lg:w-auto md:w-auto px-4 flex items-center justify-center">
-            <Tabs defaultValue="all" className=" w-full bg-transparent">
-              <TabsList className="flex w-full">
-                <Link href="/treks">
-                  <TabsTrigger value="all">All Treks</TabsTrigger>
-                </Link>
-                <Link href="/treks/all-trek-uttarakhand">
-                  <TabsTrigger value="uttarakhand">Uttarakhand</TabsTrigger>
-                </Link>
-                <Link href="/treks/all-trek-himachal-pradesh">
-                  <TabsTrigger value="Himachal">Himachal Pradesh</TabsTrigger>
-                </Link>
-              </TabsList>
-            </Tabs>
-          </div>
+        <div className="w-full px-4 flex items-center justify-center">
+          <Tabs defaultValue="uttarakhand" className=" w-full bg-transparent">
+            <TabsList className="flex w-full">
+              <Link href="/treks">
+                <TabsTrigger value="all">All Treks</TabsTrigger>
+              </Link>
+              <Link href="/treks/all-trek-uttarakhand">
+                <TabsTrigger value="uttarakhand">Uttarakhand</TabsTrigger>
+              </Link>
+              <Link href="/treks/all-trek-himachal-pradesh">
+                <TabsTrigger value="Himachal">Himachal Pradesh</TabsTrigger>
+              </Link>
+            </TabsList>
+          </Tabs>
         </div>
       </div>
-      <div className="grid lg:grid-cols-3 lg:gap-12 gap-5 md:grid-cols-2 grid-cols-1 px-0 my-16">
+      <div className="grid lg:grid-cols-3 lg:gap-12 gap-5 md:grid-cols-2 grid-cols-1 px-4 my-16">
         {trekCards.map((trek) => (
           <div
             className="lg:w-[360px] md:w-[360px] w-full h-[550px]"

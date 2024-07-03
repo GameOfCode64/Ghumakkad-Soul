@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/accordion";
 import NotFound from "@/components/not-found";
 import Link from "next/link";
+import BookBtn from "@/components/Buttons/button";
+import Btn2 from "@/components/Buttons/button2";
 
 interface Params {
   params: {
@@ -100,11 +102,7 @@ const page = async ({ params }: Params) => {
               <p className="text-white font-semibold mt-2">
                 One of the Beautiful Treks in {data.location}
               </p>
-              <Link href="/book-now">
-                <Button className="w-[120px] mt-4 bg-teal-700 hover:bg-teal-600">
-                  Book Now
-                </Button>
-              </Link>
+              <Btn2 />
             </div>
           </div>
         </div>
@@ -180,11 +178,7 @@ const page = async ({ params }: Params) => {
               {" "}
               Price: <span className="text-teal-600">₹{data.prize}</span>
             </p>
-            <Link href="/book-now">
-              <Button className=" font-semibold bg-teal-600 hover:bg-teal-700">
-                Book Now
-              </Button>
-            </Link>
+            <Btn2 />
           </div>
         </div>
         <div className="bg-[#f5f7f7] w-full basis-[25%] lg:block h-[300px] rounded-md hidden">
@@ -203,11 +197,7 @@ const page = async ({ params }: Params) => {
             <Image src={travel} alt="Book_now" className="w-full h-full" />
           </div>
           <div className="w-full px-4 mt-4">
-            <Link href="/book-now">
-              <Button className="w-full bg-teal-600 hover:bg-teal-700">
-                Book Now
-              </Button>
-            </Link>
+            <BookBtn />
           </div>
         </div>
       </div>

@@ -1,34 +1,48 @@
 "use client";
+import { z } from "zod";
 import React, { useEffect, useState } from "react";
-import { Loader2Icon } from "lucide-react";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import Custominput, { BookingFormeSchema } from "@/components/CustomInput";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Toast } from "@/components/ui/toast";
-import { toast } from "@/components/ui/use-toast";
-import { usepop } from "@/hooks/contact-pop-up";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { Button } from "./ui/button";
+import { Loader2Icon } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import getTrekName from "@/sanity/lib/querys/getalltrekname";
+import { useRouter } from "next/navigation";
+import { usebook } from "@/hooks/book-now";
 
-import travel from "@/public/traveling.svg";
+interface BookingFomrProps {
+  _id: string;
+  trekName: string;
+}
+
 const BookingForm = () => {
-  const { onOpen } = usepop();
-
+  const { onClose } = usebook();
+  const router = useRouter();
+  const [trekname, setTrekname] = useState<BookingFomrProps[]>([]);
   const [isLoading, setisLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phoneNumber: "",
-    trekName: "",
-    message: "",
+  useEffect(() => {
+    const fetchdata = async () => {
+      const data = await getTrekName();
+      setTrekname(data);
+    };
+    fetchdata();
+  }, []);
+  const form = useForm<z.infer<typeof BookingFormeSchema>>({
+    resolver: zodResolver(BookingFormeSchema),
+    defaultValues: {},
   });
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const onSubmit = async (values: z.infer<typeof BookingFormeSchema>) => {
     try {
       setisLoading(true);
       const response = await fetch("/api/sendEmail", {
@@ -36,91 +50,95 @@ const BookingForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(values),
       });
-
       if (response.ok) {
-        toast({
-          title: "Email sent successfully",
-          description: "Our Team Will Connect you Soon 😊",
-        });
-        setisLoading(false);
-        onOpen();
-      } else {
-        toast({
-          title: "Failed to send message.",
-          description: "Try Again After Some Time",
-        });
+        onClose();
       }
     } catch (error) {
-      Toast({
-        title: `${error}`,
-      });
+      console.error("An error occurred:", error);
+    } finally {
+      setisLoading(false);
+      router.push("/submit");
     }
   };
   return (
-    <div className="flex items-center justify-center h-full lg:px-20 md:px-12 px-4">
-      <div className="w-full flex justify-between bg-[#f5f7f7] rounded-3xl shadow-md lg:px-12 md:px-12 px-6 py-16">
-        <div className="lg:flex md:flex hidden flex-col basis-[40%]">
-          <h1 className="text-3xl font-bold">Book Your Favorite ❤️ Trek</h1>
-          <div className="mt-16">
-            <div className="w-[350px]">
-              <Image src={travel} alt="contact-us" className="w-full h-full" />
-            </div>
-          </div>
-        </div>
-        <div className="lg:basis-[45%] md:basis-[45%] w-full flex flex-col">
-          <form className="flex w-full flex-col gap-4" onSubmit={handleSubmit}>
-            <Input
-              name="fullName"
-              placeholder="Full Name"
-              className="py-6 focus-visible:ring-teal-700 w-full"
-              required
-              onChange={handleChange}
-            />
-            <Input
-              name="email"
-              placeholder="Email Address"
-              className="py-6 focus-visible:ring-teal-700"
-              required
-              type="email"
-              onChange={handleChange}
-            />
-            <Input
-              name="phoneNumber"
-              placeholder="Phone Number"
-              className="py-6 focus-visible:ring-teal-700"
-              onChange={handleChange}
-            />
-            <Input
-              name="trekName"
-              placeholder="Trek Name"
-              className="py-6 focus-visible:ring-teal-700"
-              onChange={handleChange}
-            />
-            <Textarea
-              name="message"
-              placeholder="Message"
-              className="focus-visible:ring-teal-700"
-              required
-              onChange={handleChange}
-            />
-            <Button
-              type="submit"
-              className="text-white font-semibold py-6 bg-teal-700 hover:bg-teal-600"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <Loader2Icon className="animate-spin mr-2" /> Sending...
-                </>
-              ) : (
-                <> Send Message</>
-              )}
-            </Button>
-          </form>
-        </div>
-      </div>
+    <div className="w-full flex flex-col  space-y-4">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+          <Custominput
+            control={form.control}
+            placeholder="Full Name"
+            name="fullName"
+          />
+          <Custominput
+            control={form.control}
+            placeholder="Email Addres"
+            name="email"
+          />
+          <Custominput
+            control={form.control}
+            placeholder="Phone Number"
+            name="phoneNumber"
+          />
+          <FormField
+            control={form.control}
+            name="trekName"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="focus:ring-1 focus:ring-teal-700">
+                      <SelectValue placeholder="Select...." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {trekname.map((trek, index) => (
+                          <SelectItem key={index} value={trek.trekName}>
+                            {trek.trekName}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem className="mt-4">
+                <FormControl>
+                  <Textarea
+                    placeholder="Tell us a little bit about your Role"
+                    className="resize-none focus-visible:ring-teal-700"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <Button
+            type="submit"
+            className="text-white mt-4 w-full font-semibold py-6 bg-teal-700 hover:bg-teal-600"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Loader2Icon className="animate-spin mr-2" /> Sending...
+              </>
+            ) : (
+              <> Send Message</>
+            )}
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 };

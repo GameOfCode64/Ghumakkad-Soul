@@ -116,8 +116,14 @@ export const trekCard = {
       name: "rating",
       title: "Rating",
       type: "number",
-      validation: (Rule: any) =>
+      validation: (Rule: Rule) =>
         Rule.min(1).max(5).error("Rating must be between 1 and 5"),
+    },
+    {
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "tag" }] }],
     },
   ],
 };

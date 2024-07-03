@@ -11,11 +11,12 @@ import {
   getBackgroundSliders,
   BackgroundSlider,
 } from "@/sanity/lib/querys/getBackgroundSliders";
-import demo from "@/public/yosemite-922757_1280.jpg";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { usebook } from "@/hooks/book-now";
 
 const ImageSlider: React.FC = () => {
+  const { onOpen } = usebook();
   const [sliders, setSliders] = useState<BackgroundSlider[]>([]);
   const plugin = React.useRef(
     Autoplay({ delay: 6000, stopOnInteraction: true })
@@ -65,11 +66,13 @@ const ImageSlider: React.FC = () => {
                       View Details
                     </Button>
                   </Link>
-                  <Link href="/book-now">
-                    <Button className="hover:bg-[#fff] px-8 py-5 rounded-3xl text-[#fff] font-semibold border-[2px] bg-transparent border-white hover:text-[#222] ease-in transition-[0.5s]">
-                      Book Now
-                    </Button>
-                  </Link>
+
+                  <Button
+                    onClick={() => onOpen}
+                    className="hover:bg-[#fff] px-8 py-5 rounded-3xl text-[#fff] font-semibold border-[2px] bg-transparent border-white hover:text-[#222] ease-in transition-[0.5s]"
+                  >
+                    Book Now
+                  </Button>
                 </div>
               </div>
             </CarouselItem>
