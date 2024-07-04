@@ -3,20 +3,10 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { MountainSnow, Smile, Star, WalletMinimal } from "lucide-react";
 import getabout from "@/sanity/lib/querys/getabout";
-interface AboutProps {
-  heading: string;
-  description1: string;
-  description2: string;
-  aboutImage: string;
-  cardHeader1: string;
-  cardHeader2: string;
-  cardHeader3: string;
-  cardHeader4: string;
-  cardDesc1: string;
-  cardDesc2: string;
-  cardDesc3: string;
-  cardDesc4: string;
-}
+import { motion } from "framer-motion";
+import { AboutProps } from "@/lib/types";
+import { container, item } from "@/lib/animation";
+
 const AboutUs = () => {
   const [about, setAbout] = useState<AboutProps | null>(null);
 
@@ -40,8 +30,25 @@ const AboutUs = () => {
 
   return (
     <div className="w-full h-auto md:px-12 lg:px-20 px-4 mt-12">
-      <div className="flex items-start bg-teal-700/10 rounded-lg lg:flex-row flex-col justify-between gap-4 w-full">
-        <div className="basis-[50%]">
+      <motion.div
+        animate={{
+          scale: [1, 2, 2, 1, 1],
+          rotate: [0, 0, 180, 180, 0],
+          borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+        }}
+        transition={{
+          duration: 2,
+          ease: "easeInOut",
+          times: [0, 0.2, 0.5, 0.8, 1],
+        }}
+        className="flex items-start bg-teal-700/10 rounded-lg lg:flex-row flex-col justify-between gap-4 w-full"
+      >
+        <motion.div
+          variants={item}
+          initial="hidden"
+          animate="visible"
+          className="basis-[50%]"
+        >
           <div className="w-full flex flex-col h-auto  rounded-xl px-6 py-6">
             <span className="text-teal-700 font-semibold text-[17px] px-1 mt-8">
               About Ghumakkad Soul
@@ -52,7 +59,7 @@ const AboutUs = () => {
             <p className="mt-14 text-[#333] text-wrap">{about.description1}</p>
             <p className="mt-14 text-[#333] text-wrap">{about.description2}</p>
           </div>
-        </div>
+        </motion.div>
         <div className="basis-[50%]">
           <div className="w-full flex flex-col h-auto rounded-xl px-6 py-6">
             <div className="w-full h-[40%] bg-center">
@@ -99,7 +106,7 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import { client } from "@/sanity/lib/client";
 
-async function getTrekCardData(start = 0, limit = 10) {
+async function getlocation1(location: string) {
   const query = `
-*[_type == "trekCard"] | order(_createdAt desc) [${start}...${limit}] {
+*[_type == "trekCard" && references(*[_type == "tag" && name == "${location}"]._id)]{
   _id,
   slug,
   trekName,
@@ -18,4 +18,4 @@ async function getTrekCardData(start = 0, limit = 10) {
   return data;
 }
 
-export default getTrekCardData;
+export default getlocation1;

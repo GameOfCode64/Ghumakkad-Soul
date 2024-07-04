@@ -14,6 +14,8 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usebook } from "@/hooks/book-now";
+import { motion } from "framer-motion";
+import { container } from "@/lib/animation";
 
 const ImageSlider: React.FC = () => {
   const { onOpen } = usebook();
@@ -50,7 +52,12 @@ const ImageSlider: React.FC = () => {
                 objectFit="cover"
                 className="z-[-1]"
               />
-              <div className="z-[1] text-white lg:px-20 lg:py-32 py-[100px] md:px-12 md:py-12 px-4 ">
+              <motion.div
+                className="z-[1] text-white lg:px-20 lg:py-32 py-[100px] md:px-12 md:py-12 px-4"
+                variants={container}
+                initial="hidden"
+                animate="visible"
+              >
                 <h1 className="lg:text-[65px] md:text-[50px] text-[40px] font-bold text-wrap">
                   {slider.headingText1}
                 </h1>
@@ -74,7 +81,7 @@ const ImageSlider: React.FC = () => {
                     Book Now
                   </Button>
                 </div>
-              </div>
+              </motion.div>
             </CarouselItem>
           ))}
         </CarouselContent>

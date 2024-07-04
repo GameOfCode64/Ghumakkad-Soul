@@ -1,22 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { SheetContent, Sheet, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Calendar,
-  Clock,
-  Map,
-  MapPin,
-  SlidersHorizontal,
-  Phone,
-  Star,
-} from "lucide-react";
-import getTrekCardData from "@/sanity/lib/querys/getcard";
+import { Calendar, Clock, Map, MapPin, Phone, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import getlocation from "@/sanity/lib/querys/getLoaction";
+import getlocation1 from "@/sanity/lib/querys/getLoaction1";
 import NotFound from "@/components/not-found";
+import getlocation from "@/sanity/lib/querys/getLoaction";
 
 export interface TrekCard {
   _id: string;
@@ -41,11 +32,11 @@ const page = () => {
   useEffect(() => {
     const fetchData = async () => {
       setisLoading(true);
-      const data = await getlocation("Himachal-Pradesh");
+      const data = await getlocation("Himachal");
       setTrekCards(data);
+      setisLoading(false);
     };
     fetchData();
-    setisLoading(false);
   }, []);
 
   if (isLoading) {
@@ -54,6 +45,9 @@ const page = () => {
   if (trekCards.length === 0) {
     return <NotFound title="Trek" link="treks" />;
   }
+  console.log(trekCards);
+  console.log("hellos");
+
   return (
     <div className="mt-4">
       <div className="flex  items-center justify-between">

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import contact from "@/public/contact.svg";
+import contact from "@/public/traveling.svg";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -67,7 +67,7 @@ const Page = () => {
               touch.
             </h1>
             <div className="flex items-center justify-center mt-16">
-              <div className="w-[250px]">
+              <div className="w-[350px]">
                 <Image
                   src={contact}
                   alt="contact-us"

@@ -6,7 +6,7 @@ import Review from "@/components/Review";
 import Blogs from "@/components/Blogs";
 export default function Home() {
   return (
-    <main className="w-[100%]">
+    <main className="w-[100%] bg-[#fff]">
       <ImageSlider />
       <TrekCard />
       <Banner />
