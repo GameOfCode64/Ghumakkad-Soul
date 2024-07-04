@@ -5,7 +5,6 @@ import { Calendar, Clock, Map, MapPin, Phone, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import getlocation1 from "@/sanity/lib/querys/getLoaction1";
 import NotFound from "@/components/not-found";
 import getlocation from "@/sanity/lib/querys/getLoaction";
 
