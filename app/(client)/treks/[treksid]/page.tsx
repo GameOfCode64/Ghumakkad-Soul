@@ -82,6 +82,7 @@ export async function generateMetadata({
 
 const TrekPage = async ({ params }: Params) => {
   const data: CardProps = await getfullTrek(params?.treksid);
+  console.log(data);
   if (!data) {
     return <NotFound title="Trek" link="treks" />;
   }

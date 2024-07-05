@@ -19,7 +19,7 @@ async function getfullTrek(slug: string) {
     answer
   },
   rating,
-  "comments":*[_type == "comment" && trekCard._ref == ^._id ]{
+  "comments":*[_type == "comment" && trekCard._ref == ^._id] | order(_createdAt){
   _createdAt,
   _id,
   message,
