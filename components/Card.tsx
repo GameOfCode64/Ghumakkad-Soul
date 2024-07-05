@@ -7,14 +7,12 @@ import Link from "next/link";
 import getTrek from "@/sanity/lib/querys/getTreks";
 import { TrekCard } from "@/lib/types";
 
-const start = 0;
+const start = 10;
 const limit = 10;
 const Card = ({ count }: { count: number }) => {
   const [trekCards, setTrekCards] = useState<TrekCard[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log(typeof trekCards.length);
-  console.log(typeof count);
+  console.log(count);
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -27,16 +25,17 @@ const Card = ({ count }: { count: number }) => {
 
   const fetchMore = async (start: number, limit: number) => {
     let length = count + 1;
-    start = limit;
-    let len = length - limit;
+    let len = length - start;
     if (len < 10) {
-      limit = len + 10;
+      limit = len;
     } else {
       limit + 10;
     }
     setIsLoading(true);
     const data = await getTrek(start, limit);
+    console.log(data);
     setTrekCards((prevTrekCards) => [...prevTrekCards, ...data]);
+    start + 10;
     setIsLoading(false);
   };
 

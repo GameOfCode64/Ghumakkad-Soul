@@ -31,16 +31,10 @@ const AboutUs = () => {
   return (
     <div className="w-full h-auto md:px-12 lg:px-20 px-4 mt-12">
       <motion.div
-        animate={{
-          scale: [1, 2, 2, 1, 1],
-          rotate: [0, 0, 180, 180, 0],
-          borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-        }}
-        transition={{
-          duration: 2,
-          ease: "easeInOut",
-          times: [0, 0.2, 0.5, 0.8, 1],
-        }}
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        exit={{ y: "100%" }}
+        transition={{ duration: 0.5 }}
         className="flex items-start bg-teal-700/10 rounded-lg lg:flex-row flex-col justify-between gap-4 w-full"
       >
         <motion.div

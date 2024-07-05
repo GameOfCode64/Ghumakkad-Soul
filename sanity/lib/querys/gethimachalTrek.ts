@@ -1,8 +1,7 @@
 import { client } from "@/sanity/lib/client";
 
-async function getlocation(location: string) {
-  const query = `
-*[_type == "trekCard" && references(*[_type == "tag" && name == "${location}"]._id)]{
+async function gethimachalTreks(start = 1, limit = 20) {
+  const query = `*[_type == "trekCard"] | order(_createdAt desc) [${start}...${limit}] {
   _id,
   slug,
   trekName,
@@ -12,10 +11,9 @@ async function getlocation(location: string) {
   distance,
   bestTime,
   rating
-}
-  `;
+}`;
   const data = await client.fetch(query);
   return data;
 }
 
-export default getlocation;
+export default gethimachalTreks;

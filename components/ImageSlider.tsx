@@ -54,9 +54,10 @@ const ImageSlider: React.FC = () => {
               />
               <motion.div
                 className="z-[1] text-white lg:px-20 lg:py-32 py-[100px] md:px-12 md:py-12 px-4"
-                variants={container}
-                initial="hidden"
-                animate="visible"
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ duration: 0.5 }}
               >
                 <h1 className="lg:text-[65px] md:text-[50px] text-[40px] font-bold text-wrap">
                   {slider.headingText1}

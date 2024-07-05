@@ -6,7 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import NotFound from "@/components/not-found";
-import getlocation from "@/sanity/lib/querys/getLoaction";
+import gethimachalTreks from "@/sanity/lib/querys/gethimachalTrek";
+import Filter from "@/components/Filter";
 
 export interface TrekCard {
   _id: string;
@@ -31,7 +32,7 @@ const page = () => {
   useEffect(() => {
     const fetchData = async () => {
       setisLoading(true);
-      const data = await getlocation("Himachal");
+      const data = await gethimachalTreks();
       setTrekCards(data);
       setisLoading(false);
     };
@@ -44,32 +45,10 @@ const page = () => {
   if (trekCards.length === 0) {
     return <NotFound title="Trek" link="treks" />;
   }
-  console.log(trekCards);
-  console.log("hellos");
 
   return (
     <div className="mt-4">
-      <div className="flex  items-center justify-between">
-        <div className="md:flex lg:block hidden">
-          <p className="font-semibold">Filters By:</p>
-        </div>
-
-        <div className="w-full lg:w-auto md:w-auto px-4 flex items-center justify-center">
-          <Tabs defaultValue="Himachal" className=" w-full bg-transparent">
-            <TabsList className="flex w-full">
-              <Link href="/treks">
-                <TabsTrigger value="all">All Treks</TabsTrigger>
-              </Link>
-              <Link href="/treks/all-trek-uttarakhand">
-                <TabsTrigger value="uttarakhand">Uttarakhand</TabsTrigger>
-              </Link>
-              <Link href="/treks/all-trek-himachal-pradesh">
-                <TabsTrigger value="Himachal">Himachal Pradesh</TabsTrigger>
-              </Link>
-            </TabsList>
-          </Tabs>
-        </div>
-      </div>
+      <Filter />
       <div className="grid lg:grid-cols-3 lg:gap-12 gap-5 md:grid-cols-2 grid-cols-1 px-0 my-16">
         {trekCards.map((trek) => (
           <div

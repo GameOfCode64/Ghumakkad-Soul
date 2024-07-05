@@ -1,8 +1,6 @@
 import React from "react";
 import Card from "@/components/Card";
 import Filter from "@/components/Filter";
-
-import { TrekCard } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
 
 async function checkDataLength() {
