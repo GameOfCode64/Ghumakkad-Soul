@@ -6,52 +6,44 @@ import Image from "next/image";
 import Link from "next/link";
 import getTrek from "@/sanity/lib/querys/getTreks";
 import { TrekCard } from "@/lib/types";
-
+let offset = 0;
+let limit = 10;
 const Card = ({ count }: { count: number }) => {
   const [trekCards, setTrekCards] = useState<TrekCard[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(count);
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const data = await getTrek();
+      const data = await getTrek(0, 10);
       setTrekCards(data);
+      offset = 10;
+      limit = 20;
       setIsLoading(false);
     };
     fetchData();
   }, []);
 
   const fetchMore = async () => {
-    let start = 10;
-    let limit = 10;
-    let length = count + 1;
-    console.log(length);
-    let len = length - limit;
-    console.log(len);
-    if (len < 10) {
-      limit = len + 10;
-    } else {
-      for (let j = 1; j <= 10; j++) {
-        start++;
-      }
-    }
-    console.log("start", start);
-    console.log("start", limit);
     setIsLoading(true);
-    const data = await getTrek(start, limit);
+    console.log(offset, limit);
+    const data = await getTrek(offset, limit);
     console.log(data);
     setTrekCards((prevTrekCards) => [...prevTrekCards, ...data]);
-    for (let i = 1; i <= 10; i++) {
-      start++;
+    length = count++ - offset;
+    console.log("length", length);
+    if (length < 10) {
+      limit = limit + length;
+      limit++;
+    } else {
+      limit = limit + 10;
     }
-    console.log("after start:", start);
-    console.log("after limit:", limit);
+    offset = offset + 10;
+    console.log(offset);
+    console.log("Next Limit: ", limit);
+    console.log("Next offset: ", offset);
     setIsLoading(false);
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>
@@ -124,21 +116,18 @@ const Card = ({ count }: { count: number }) => {
       </div>
 
       <div className="mt-4 flex items-center justify-center">
-        {count !== trekCards.length ? (
+        {count === trekCards.length ? (
+          <></>
+        ) : (
           <>
             <Button
               className=" bg-teal-700 hover:bg-teal-600"
-              onClick={
-                count === trekCards.length
-                  ? () => console.log("Hellos")
-                  : () => fetchMore()
-              }
+              onClick={fetchMore}
+              disabled={isLoading}
             >
-              View More Treks
+              {isLoading ? "Loading..." : "View More Treks"}
             </Button>
           </>
-        ) : (
-          <></>
         )}
       </div>
     </>
