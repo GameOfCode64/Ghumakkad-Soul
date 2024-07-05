@@ -12,13 +12,18 @@ async function getfullTrek(slug: string) {
   distance,
   bestTime,
   trekDescription,
-  imageGallery,
+ "imageGalleryUrls": imageGallery[].asset->url,
  faqSection[] {
     _key,
     question,
     answer
   },
   rating,
+   "comments": *[_type == "comment" && trekCard._ref == ^._id ] | order(_createdAt) {
+      name,
+      comment,
+      _createdAt,
+    }
 }`;
 
   const data = await client.fetch(query);

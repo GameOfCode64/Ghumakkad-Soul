@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
-import { Button } from "@/components/ui/button";
 import {
   Calendar,
   Clock,
@@ -24,16 +23,25 @@ import NotFound from "@/components/not-found";
 import Link from "next/link";
 import BookBtn from "@/components/Buttons/button";
 import Btn2 from "@/components/Buttons/button2";
+import Comments from "@/components/Comments";
+import ShowComment from "@/components/ShowComment";
 
 interface Params {
   params: {
     treksid: string;
   };
 }
+
 interface FAQ {
   _key: string;
   question: string;
   answer: string;
+}
+
+interface Gallery {
+  asset: {
+    url: string;
+  };
 }
 
 interface CardProps {
@@ -45,11 +53,12 @@ interface CardProps {
   trekAltitude: string;
   location: string;
   distance: string;
-  bestTime: string;
+  bestTime: string[];
   trekDescription: any;
-  imageGallery: string;
+  imageGalleryUrls: string[];
   faqSection: FAQ[];
   rating: string;
+  comments?: Array<Comment>;
 }
 
 export async function generateMetadata({
@@ -72,27 +81,26 @@ export async function generateMetadata({
   };
 }
 
-const page = async ({ params }: Params) => {
+const TrekPage = async ({ params }: Params) => {
   const data: CardProps = await getfullTrek(params?.treksid);
 
   if (!data) {
     return <NotFound title="Trek" link="treks" />;
   }
 
+  const hasImageGallery =
+    data.imageGalleryUrls && data.imageGalleryUrls.length > 0;
+
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full">
       <div className="px-4 lg:px-0">
-        <div className="w-full md:h-[60dvh] lg:px-20 md:px-12  relative lg:h-[80dvh] h-[50vh] object-center">
+        <div className="w-full md:h-[60dvh] lg:px-20 md:px-12 relative lg:h-[80dvh] h-[50vh] object-center">
           <Image
-            src={
-              data.backgroundImageUrl == null || data.backgroundImageUrl === ""
-                ? "/fallback-image.jpg"
-                : data.backgroundImageUrl
-            }
+            src={data.backgroundImageUrl || "/fallback-image.jpg"}
             alt="TrekImage"
             width={700}
             height={700}
-            className="w-full h-full z-[-1] absolute top-0 left-0 rounded-xl "
+            className="w-full h-full z-[-1] absolute top-0 left-0 rounded-xl"
           />
           <div className="z-[1] relative flex items-center h-full px-6">
             <div className="flex flex-col">
@@ -143,7 +151,7 @@ const page = async ({ params }: Params) => {
             <Calendar size={17} className="text-teal-700" />
             Best Time:{" "}
             <span className="text-[12px] text-teal-700">
-              {data.bestTime.toString()}
+              {data.bestTime.join(", ")}
             </span>
           </p>
         </div>
@@ -159,7 +167,31 @@ const page = async ({ params }: Params) => {
               components={myPortableTextComponents}
             />
           </div>
-          <div className="mt-16 lg:mr-24 ">
+
+          {hasImageGallery && (
+            <div className="mt-14">
+              <h1 className="mb-16 text-3xl font-bold relative gallery text-teal-700">
+                Image Gallery
+              </h1>
+              <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
+                {data.imageGalleryUrls.map((imageUrl, index) => (
+                  <div
+                    key={index}
+                    className="lg:w-[350px] md:w-[350px] h-[250px]"
+                  >
+                    <Image
+                      src={imageUrl}
+                      alt={`Gallery Image ${index + 1}`}
+                      width={900}
+                      height={500}
+                      className="w-full h-full rounded-md"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          <div className="mt-16 lg:mr-24">
             <Accordion type="single" collapsible className="w-full">
               {data.faqSection.map((faq) => (
                 <AccordionItem value={faq._key} key={faq._key}>
@@ -171,7 +203,13 @@ const page = async ({ params }: Params) => {
               ))}
             </Accordion>
           </div>
+          {/* Review Section */}
+          <Comments postId={data._id} />
+          <ShowComment comments={data?.comments || []} slug={params?.treksid} />
+          {/* Review Section */}
         </div>
+
+        {/* Pricing */}
         <div className="lg:hidden fixed w-full h-[70px] bg-[#00000015] backdrop-blur-3xl bottom-0">
           <div className="flex items-center justify-between px-4 h-full">
             <p className="font-bold">
@@ -221,4 +259,4 @@ const myPortableTextComponents = {
   },
 };
 
-export default page;
+export default TrekPage;

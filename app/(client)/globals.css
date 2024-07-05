@@ -85,4 +85,7 @@
   .trek::before {
     @apply content-[''] w-12 h-1 rounded-full absolute -bottom-2.5 left-0 bg-teal-600;
   }
+  .gallery::before {
+    @apply content-[''] w-24 h-1 rounded-full absolute -bottom-2.5 left-0 bg-teal-600;
+  }
 }
