@@ -58,7 +58,6 @@ interface CardProps {
   imageGalleryUrls: string[];
   faqSection: FAQ[];
   rating: string;
-  comments?: Array<Comment>;
 }
 
 export async function generateMetadata({
@@ -205,7 +204,7 @@ const TrekPage = async ({ params }: Params) => {
           </div>
           {/* Review Section */}
           <Comments postId={data._id} />
-          <ShowComment comments={data?.comments || []} slug={params?.treksid} />
+          {/* <ShowComment comments={data?.comments || []} slug={params?.treksid} /> */}
           {/* Review Section */}
         </div>
 
