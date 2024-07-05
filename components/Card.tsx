@@ -25,17 +25,27 @@ const Card = ({ count }: { count: number }) => {
     let start = 10;
     let limit = 10;
     let length = count + 1;
-    let len = length - start;
+    console.log(length);
+    let len = length - limit;
+    console.log(len);
     if (len < 10) {
       limit = len + 10;
     } else {
-      limit + 10;
+      for (let j = 1; j <= 10; j++) {
+        start++;
+      }
     }
+    console.log("start", start);
+    console.log("start", limit);
     setIsLoading(true);
     const data = await getTrek(start, limit);
     console.log(data);
     setTrekCards((prevTrekCards) => [...prevTrekCards, ...data]);
-    start + 10;
+    for (let i = 1; i <= 10; i++) {
+      start++;
+    }
+    console.log("after start:", start);
+    console.log("after limit:", limit);
     setIsLoading(false);
   };
 
