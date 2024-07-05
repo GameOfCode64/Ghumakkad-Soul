@@ -79,10 +79,10 @@ export async function generateMetadata({
     },
   };
 }
-
+export const revalidate = 1;
 const TrekPage = async ({ params }: Params) => {
   const data: CardProps = await getfullTrek(params?.treksid);
-  console.log(data);
+
   if (!data) {
     return <NotFound title="Trek" link="treks" />;
   }
@@ -90,6 +90,7 @@ const TrekPage = async ({ params }: Params) => {
   const hasImageGallery =
     data.imageGalleryUrls && data.imageGalleryUrls.length > 0;
 
+  // reva;
   return (
     <div className="w-full h-full">
       <div className="px-4 lg:px-0">
