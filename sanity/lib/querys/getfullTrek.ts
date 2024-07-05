@@ -19,11 +19,12 @@ async function getfullTrek(slug: string) {
     answer
   },
   rating,
-   "comments": *[_type == "comment" && trekCard._ref == ^._id ] | order(_createdAt) {
-      name,
-      comment,
-      _createdAt,
-    }
+  "comments":*[_type == "comment" && trekCard._ref == ^._id ]{
+  _createdAt,
+  _id,
+  message,
+  fullName
+} 
 }`;
 
   const data = await client.fetch(query);

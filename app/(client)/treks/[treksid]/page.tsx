@@ -23,6 +23,7 @@ import NotFound from "@/components/not-found";
 import BookBtn from "@/components/Buttons/button";
 import Btn2 from "@/components/Buttons/button2";
 import Comments from "@/components/Comments";
+import AllComments from "@/components/AllComments";
 
 interface Params {
   params: {
@@ -34,6 +35,12 @@ interface FAQ {
   _key: string;
   question: string;
   answer: string;
+}
+interface Comment {
+  _createdAt: string;
+  _id: string;
+  message: string;
+  fullName: string;
 }
 
 interface CardProps {
@@ -50,6 +57,7 @@ interface CardProps {
   imageGalleryUrls: string[];
   faqSection: FAQ[];
   rating: string;
+  comments?: Array<Comment>;
 }
 
 export async function generateMetadata({
@@ -74,7 +82,6 @@ export async function generateMetadata({
 
 const TrekPage = async ({ params }: Params) => {
   const data: CardProps = await getfullTrek(params?.treksid);
-
   if (!data) {
     return <NotFound title="Trek" link="treks" />;
   }
@@ -196,6 +203,8 @@ const TrekPage = async ({ params }: Params) => {
           </div>
           {/* Review Section */}
           <Comments postId={data._id} />
+          <AllComments comments={data?.comments || []} />
+          {/* Review Section */}
         </div>
 
         {/* Pricing */}

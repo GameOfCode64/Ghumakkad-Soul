@@ -26,20 +26,16 @@ const CommentFrom = ({ trekId }: { trekId: string }) => {
         },
         body: JSON.stringify({ trekId, ...values }),
       });
-      if (response.ok) {
-        window.location.reload();
-      } else {
-        window.location.reload();
-      }
-      setisLoading(false);
     } catch (error) {
       console.error("An error occurred:", error);
     } finally {
+      setisLoading(false);
+      window.location.reload();
     }
   };
 
   return (
-    <div className="lg:w-[900px] md:w-[450px] w-full">
+    <div className="lg:w-[900px] w-full">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
           <CommentInput

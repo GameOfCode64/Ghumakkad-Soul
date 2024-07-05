@@ -6,7 +6,7 @@ export const comment = defineType({
   type: "document",
   fields: [
     {
-      name: "name",
+      name: "fullName",
       title: "Name",
       type: "string",
       readOnly: true,
@@ -18,7 +18,7 @@ export const comment = defineType({
       readOnly: true,
     },
     {
-      name: "comment",
+      name: "message",
       title: "Comment",
       type: "text",
       readOnly: true,
