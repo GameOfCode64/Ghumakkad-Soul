@@ -7,8 +7,6 @@ import Link from "next/link";
 import getTrek from "@/sanity/lib/querys/getTreks";
 import { TrekCard } from "@/lib/types";
 
-const start = 10;
-const limit = 10;
 const Card = ({ count }: { count: number }) => {
   const [trekCards, setTrekCards] = useState<TrekCard[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,11 +21,13 @@ const Card = ({ count }: { count: number }) => {
     fetchData();
   }, []);
 
-  const fetchMore = async (start: number, limit: number) => {
+  const fetchMore = async () => {
+    let start = 10;
+    let limit = 10;
     let length = count + 1;
     let len = length - start;
     if (len < 10) {
-      limit = len;
+      limit = len + 10;
     } else {
       limit + 10;
     }
@@ -121,7 +121,7 @@ const Card = ({ count }: { count: number }) => {
               onClick={
                 count === trekCards.length
                   ? () => console.log("Hellos")
-                  : () => fetchMore(start, limit)
+                  : () => fetchMore()
               }
             >
               View More Treks
