@@ -20,11 +20,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import NotFound from "@/components/not-found";
-import Link from "next/link";
 import BookBtn from "@/components/Buttons/button";
 import Btn2 from "@/components/Buttons/button2";
 import Comments from "@/components/Comments";
-import ShowComment from "@/components/ShowComment";
 
 interface Params {
   params: {
@@ -36,12 +34,6 @@ interface FAQ {
   _key: string;
   question: string;
   answer: string;
-}
-
-interface Gallery {
-  asset: {
-    url: string;
-  };
 }
 
 interface CardProps {
@@ -204,8 +196,6 @@ const TrekPage = async ({ params }: Params) => {
           </div>
           {/* Review Section */}
           <Comments postId={data._id} />
-          {/* <ShowComment comments={data?.comments || []} slug={params?.treksid} /> */}
-          {/* Review Section */}
         </div>
 
         {/* Pricing */}
