@@ -37,7 +37,7 @@ const ImageSlider: React.FC = () => {
     fetchSliders();
   }, []);
   return (
-    <div className="w-full h-screen relative">
+    <div className="w-full lg:h-screen md:h-[600px] h-screen relative">
       <Carousel
         plugins={[plugin.current]}
         className="w-full h-full md:h-[600px] lg:h-screen"
