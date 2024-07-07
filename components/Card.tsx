@@ -51,7 +51,7 @@ const Card = ({ count }: { count: number }) => {
         <div className="grid lg:grid-cols-3 lg:gap-12 gap-5 md:grid-cols-2 grid-cols-1 px-0 my-16">
           {trekCards.map((trek) => (
             <div
-              className="lg:w-[360px] md:w-[360px] w-full h-[550px]"
+              className="lg:w-[320px] md:w-[360px] w-full h-[550px]"
               key={trek._id}
             >
               <div className="w-full h-[50%] bg-center">
