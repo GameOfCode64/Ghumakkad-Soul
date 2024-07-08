@@ -89,6 +89,7 @@ const TrekPage = async ({ params }: Params) => {
 
   const hasImageGallery =
     data.imageGalleryUrls && data.imageGalleryUrls.length > 0;
+  const hasFnq = data.faqSection && data.faqSection.length > 0;
 
   // reva;
   return (
@@ -156,60 +157,65 @@ const TrekPage = async ({ params }: Params) => {
           </p>
         </div>
       </div>
-      <div className="w-full mt-4 flex lg:gap-14">
-        <div className="lg:basis-[70%] w-full md:px-12 px-4 lg:px-1">
-          <h1 className="font-bold text-[30px] text-teal-600">
-            {data.trekName} Overview
-          </h1>
-          <div className={BlogStyle}>
-            <PortableText
-              value={data?.trekDescription}
-              components={myPortableTextComponents}
-            />
-          </div>
-
-          {hasImageGallery && (
-            <div className="mt-14">
-              <h1 className="mb-16 text-3xl font-bold relative gallery text-teal-700">
-                Image Gallery
-              </h1>
-              <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
-                {data.imageGalleryUrls.map((imageUrl, index) => (
-                  <div
-                    key={index}
-                    className="lg:w-[350px] md:w-[350px] h-[250px]"
-                  >
-                    <Image
-                      src={imageUrl}
-                      alt={`Gallery Image ${index + 1}`}
-                      width={900}
-                      height={500}
-                      className="w-full h-full rounded-md"
-                    />
-                  </div>
-                ))}
-              </div>
+      <div className="w-full mt-4 grid md:grid-cols-2 relative">
+        <div className="md:w-[900px] w-full">
+          <div className="w-[100%] md:px-12 px-4 lg:px-1">
+            <h1 className="font-bold md:text-[30px] text-[22px] text-teal-600">
+              {data.trekName} Overview
+            </h1>
+            <div className={BlogStyle}>
+              <PortableText
+                value={data?.trekDescription}
+                components={myPortableTextComponents}
+              />
             </div>
-          )}
-          <div className="mt-16 lg:mr-24">
-            <Accordion type="single" collapsible className="w-full">
-              {data.faqSection.map((faq) => (
-                <AccordionItem value={faq._key} key={faq._key}>
-                  <AccordionTrigger className="text-left text-wrap">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent>{faq.answer}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+
+            {hasImageGallery && (
+              <div className="mt-14">
+                <h1 className="mb-16 text-3xl font-bold relative gallery text-teal-700">
+                  Image Gallery
+                </h1>
+                <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
+                  {data.imageGalleryUrls.map((imageUrl, index) => (
+                    <div
+                      key={index}
+                      className="lg:w-[350px] md:w-[350px] h-[250px]"
+                    >
+                      <Image
+                        src={imageUrl}
+                        alt={`Gallery Image ${index + 1}`}
+                        width={900}
+                        height={500}
+                        className="w-full h-full rounded-md cursor-pointer"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div className="mt-16 lg:mr-24">
+              {hasFnq && (
+                <Accordion type="single" collapsible className="w-full">
+                  {data.faqSection.map((faq) => (
+                    <AccordionItem value={faq._key} key={faq._key}>
+                      <AccordionTrigger className="text-left text-wrap">
+                        {faq.question}
+                      </AccordionTrigger>
+                      <AccordionContent>{faq.answer}</AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              )}
+            </div>
+            {/* Review Section */}
+            <Comments postId={data._id} />
+            <AllComments comments={data?.comments || []} />
+            {/* Review Section */}
           </div>
-          {/* Review Section */}
-          <Comments postId={data._id} />
-          <AllComments comments={data?.comments || []} />
-          {/* Review Section */}
         </div>
 
         {/* Pricing */}
+        {/* Only for mobile */}
         <div className="lg:hidden fixed w-full h-[70px] bg-[#00000015] backdrop-blur-3xl bottom-0">
           <div className="flex items-center justify-between px-4 h-full">
             <p className="font-bold">
@@ -219,23 +225,26 @@ const TrekPage = async ({ params }: Params) => {
             <Btn2 />
           </div>
         </div>
-        <div className="bg-[#f5f7f7] w-full basis-[25%] lg:block h-[300px] rounded-md hidden">
-          <div className="flex flex-col px-4 py-4">
-            <h1 className="font-bold text-emerald-600 text-lg">
-              Cost Per Person
-            </h1>
-            <div className="flex items-center justify-normal gap-2 mt-4">
-              <p className="font-semibold text-teal-600 text-lg ml-1">
-                ₹{data.prize}
-              </p>
-              <span className="text-[10px] font-semibold">+5% GST</span>
+        {/* Only for mobile */}
+        <div className="w-[300px] absolute top-4 right-0">
+          <div className="bg-[#f5f7f7] w-full lg:block h-[300px] rounded-md hidden">
+            <div className="flex flex-col px-4 py-4">
+              <h1 className="font-bold text-emerald-600 text-lg">
+                Cost Per Person
+              </h1>
+              <div className="flex items-center justify-normal gap-2 mt-4">
+                <p className="font-semibold text-teal-600 text-lg ml-1">
+                  ₹{data.prize}
+                </p>
+                <span className="text-[10px] font-semibold">+5% GST</span>
+              </div>
             </div>
-          </div>
-          <div className="w-full h-[120px] px-4">
-            <Image src={travel} alt="Book_now" className="w-full h-full" />
-          </div>
-          <div className="w-full px-4 mt-4">
-            <BookBtn />
+            <div className="w-full h-[120px] px-4">
+              <Image src={travel} alt="Book_now" className="w-full h-full" />
+            </div>
+            <div className="w-full px-4 mt-4">
+              <BookBtn />
+            </div>
           </div>
         </div>
       </div>
@@ -253,7 +262,7 @@ const myPortableTextComponents = {
         alt="Post"
         width={900}
         height={500}
-        className="w-full lg:h-[70dvh] h-[50vh] rounded-md"
+        className="w-full md:h-[60dvh] h-[50vh] rounded-md"
       />
     ),
   },
